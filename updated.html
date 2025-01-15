@@ -43,8 +43,8 @@
     .filters select {
       padding: 10px 15px;
       font-size: 1em;
-      border: 1px solid #ccc;
-      border-radius: 5px;
+      border: 1px solid #000000;
+      border-radius: 40px;
       background-color: #fff;
     }
 
@@ -57,15 +57,16 @@
       display: flex;
       flex-wrap: wrap;
       gap: 30px;
-      justify-content: center;
+      justify-content: space-between;
     }
 
     .person-card {
-      background: #fff;
-      padding: 25px;
-      border-radius: 10px;
+      background: rgb(224, 212, 196);
+      padding: 20px;
+      border-radius: 40px;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      width: 280px;
+      width: calc(33.333% - 20px);
+      /* Three cards per row with space between */
       text-align: center;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       text-decoration: none;
@@ -73,9 +74,8 @@
     }
 
     .person-card img {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
+      width: 200px;
+      height: 200px;
       object-fit: cover;
       margin-bottom: 20px;
     }
@@ -104,7 +104,7 @@
 
     .person-card a {
       text-decoration: none;
-      color: inherit;
+      color: white;
     }
 
     /* Hover effects for cards */
@@ -125,7 +125,7 @@
       font-size: 1em;
       font-weight: 600;
       color: #fff;
-      background-color: #007BFF;
+      background-color: #a07c0c;
       border: none;
       border-radius: 5px;
       cursor: pointer;
@@ -136,13 +136,27 @@
 
     /* Removing hover effect */
     .read-more-btn:hover {
-      background-color: #f874f2;
+      background-color: #a07c0c;
       transform: none;
     }
 
     .read-more-btn:active {
-      background-color: #007BFF;
+      background-color: #443300;
       transform: none;
+    }
+
+    @media (max-width: 1200px) {
+      .person-card {
+        width: calc(50% - 20px);
+        /* Two cards per row on smaller screens */
+      }
+    }
+
+    @media (max-width: 768px) {
+      .person-card {
+        width: 100%;
+        /* One card per row on mobile */
+      }
     }
   </style>
 </head>
@@ -223,43 +237,46 @@
   </div>
 
   <script>
-    // Updated therapists data with new treatment areas
+    // Therapists data with new detailed information
     const people = [
-      { name: "Maria Carreon", title: "Therapist", location: "Virtual", services: "Affordable Therapy, Individual Therapy, Family Therapy, Teen Therapy", treatmentAreas: "Anxiety and Depression", typesOfTherapists: "Therapist", imgSrc: "https://images.squarespace-cdn.com/content/v1/640f7769e9fa4568de68043e/444ac106-e7c5-42a4-b970-2d111a939054/The+Therapeutic+Way+%283%29.jpg?format=750w", link: "#" },
-      { name: "Kaitlyn Fox", title: "Therapist", location: "Virtual", services: "Affordable Therapy, Individual Therapy, Teen Therapy", treatmentAreas: "Trauma Therapy", typesOfTherapists: "Therapist", imgSrc: "https://via.placeholder.com/150", link: "#" },
-      { name: "Erin Coffell", title: "Therapist", location: "Virtual", services: "Individual Therapy, Teen Therapy", treatmentAreas: "Anxiety and Depression", typesOfTherapists: "Therapist", imgSrc: "https://via.placeholder.com/150", link: "#" },
-      { name: "Vidhi Joshi", title: "Therapist", location: "In-Person", services: "Individual Therapy, Couples Therapy, Family Therapy, Teen Therapy, EMDR Therapy", treatmentAreas: "EMDR Therapy", typesOfTherapists: "Therapist", imgSrc: "https://via.placeholder.com/150", link: "#" },
-      { name: "Syeda Zaidi", title: "Therapist", location: "In-Person", services: "Individual Therapy, Couples Therapy, Family Therapy, Teen Therapy", treatmentAreas: "Couples Therapy", typesOfTherapists: "Therapist", imgSrc: "https://via.placeholder.com/150", link: "#" },
-      { name: "Anumeet Sandhu", title: "Therapist", location: "In-Person", services: "Individual Therapy", treatmentAreas: "Trauma Therapy", typesOfTherapists: "Therapist", imgSrc: "https://via.placeholder.com/150", link: "#" },
-      { name: "Caroline Martini", title: "Therapist", location: "Virtual", services: "Affordable Therapy, Individual Therapy, Couples Therapy, Family Therapy, Teen Therapy", treatmentAreas: "Anxiety and Depression", typesOfTherapists: "Therapist", imgSrc: "https://via.placeholder.com/150", link: "#" },
-      { name: "Krista MacKenzie", title: "Therapist", location: "In-Person", services: "Individual Therapy, Couples Therapy, Family Therapy, Teen Therapy", treatmentAreas: "Couples Therapy", typesOfTherapists: "Therapist", imgSrc: "https://via.placeholder.com/150", link: "#" },
-      { name: "Vrushalee Nachar", title: "Therapist", location: "Virtual", services: "Individual Therapy, Couples Therapy, Workshops, Group Therapy", treatmentAreas: "Trauma Therapy", typesOfTherapists: "Therapist", imgSrc: "https://via.placeholder.com/150", link: "#" },
-      { name: "Samantha Burns", title: "Therapist", location: "Virtual", services: "Individual Therapy, Couples Therapy, Family Therapy, Teen Therapy", treatmentAreas: "Trauma Therapy", typesOfTherapists: "Therapist", imgSrc: "https://via.placeholder.com/150", link: "#" },
-      { name: "Shikha Seeboruth", title: "Founder and Clinical Director", location: "Virtual", services: "Individual Therapy, Couples Therapy, Workshops", treatmentAreas: "Couples Therapy", typesOfTherapists: "Founder and Clinical Director", imgSrc: "https://via.placeholder.com/150", link: "#" }
+      { name: "Maria Carreon", title: "Therapist", location: "Virtual", services: "Affordable Therapy, Individual Therapy, Family Therapy, Teen Therapy", treatmentAreas: "Relationship Issues, Relational Trauma, Childhood and Attachment Wounds, Narcissistic Abuse Recovery, Family Estrangement, Parenting, Breakup/Separation/Divorce, ADHD, Anxiety, Depression, Grief/Loss, Stress & Burnout, Codependency", typesOfTherapists: "Therapist", imgSrc: "https://images.squarespace-cdn.com/content/v1/640f7769e9fa4568de68043e/444ac106-e7c5-42a4-b970-2d111a939054/The+Therapeutic+Way+%283%29.jpg?format=750w", link: "#" },
+      { name: "Kaitlyn Fox", title: "Therapist", location: "Virtual", services: "Affordable Therapy, Individual Therapy, Teen Therapy", treatmentAreas: "Relationship Issues, Betrayal and Relational Trauma, Childhood and Attachment Wounds, Narcissistic Abuse Recovery, Family Estrangement, Anxiety, Depression, Grief/Loss, Stress & Burnout", typesOfTherapists: "Therapist", imgSrc: "https://via.placeholder.com/150", link: "#" },
+      { name: "Erin Coffell", title: "Therapist", location: "Virtual", services: "Individual Therapy, Teen Therapy", treatmentAreas: "Relationship Issues, Relational Trauma, Childhood and Attachment wounds, Narcissistic Abuse Recovery, Anxiety, Stress & Burnout, Family Estrangement, Grief/Loss, Chronic Illness and Pain, LGBTQ+ stressors", typesOfTherapists: "Therapist", imgSrc: "https://via.placeholder.com/150", link: "#" },
+      { name: "Vidhi Joshi", title: "Therapist", location: "In-Person", services: "Individual Therapy, Couples Therapy, Family Therapy, Teen Therapy, EMDR Therapy", treatmentAreas: "Relationship Issues, Relational Trauma, Narcissistic Abuse Recovery, C-PTSD, Attachment Wounds, Childhood Trauma, Stress & Burnout, Life Transitions, Grief/Loss, Chronic Illness, Anxiety, Depression, Family Estrangement (Parents and/or Adult children)", typesOfTherapists: "Therapist", imgSrc: "https://via.placeholder.com/150", link: "#" },
+      { name: "Syeda Zaidi", title: "Therapist", location: "In-Person", services: "Individual therapy, Couples therapy, Family therapy, Teen therapy", treatmentAreas: "Relationship Issues, Relational Trauma, C-PTSD, Childhood Trauma, Intergenerational Trauma, Narcissistic Abuse Recovery, ADHD, Domestic Violence, Perinatal and Postpartum Mental Health, Anxiety", typesOfTherapists: "Therapist", imgSrc: "https://via.placeholder.com/150", link: "#" },
+      { name: "Anumeet Sandhu", title: "Therapist", location: "In-Person", services: "Individual therapy", treatmentAreas: "Relationship Issues, Narcissistic Abuse Recovery, Attachment Wounds, Intergenerational Trauma, Relational Trauma & Breakdown (Divorce, Infidelity, Separation), Anxiety, Depression, Grief/Loss, LGBTQ+ Relationship challenges, Polyamorous relationship", typesOfTherapists: "Therapist", imgSrc: "https://via.placeholder.com/150", link: "#" },
+      { name: "Caroline Martini", title: "Therapist", location: "Virtual", services: "Affordable therapy, Individual therapy, Couples therapy, Family therapy, Teen therapy", treatmentAreas: "Relationship Issues, Relational Trauma, Childhood wounds, Narcissistic Abuse Recovery, Anxiety, Depression, Stress & Burnout, Grief/Loss, Family Estrangement, Perinatal and Postpartum Mental Health", typesOfTherapists: "Therapist", imgSrc: "https://via.placeholder.com/150", link: "#" },
+      { name: "Krista MacKenzie", title: "Therapist", location: "In-Person", services: "Individual Therapy, Couples Therapy, Family Therapy, Teen Therapy", treatmentAreas: "Marriage and Couples Therapy, Relationship Issues, Narcissistic Abuse Recovery, Attachment Wounds, Stress & Burnout, Anxiety, Depression, Family Estrangement, Bipolar Disorder, Breakups/Separation/Divorce", typesOfTherapists: "Therapist", imgSrc: "https://via.placeholder.com/150", link: "#" },
+      { name: "Vrushalee Nachar", title: "Therapist", location: "Virtual", services: "Individual therapy, Couples therapy, Workshops, and Group Therapy", treatmentAreas: "Relationship Issues, Relational Trauma and PTSD, Attachment wounds, Narcissistic Abuse Recovery, ADHD, Separation/Divorce, Anxiety, and Depression", typesOfTherapists: "Therapist", imgSrc: "https://via.placeholder.com/150", link: "#" },
+      { name: "Samantha Burns", title: "Therapist", location: "Virtual", services: "Individual therapy, Couples therapy, Family therapy, Teen therapy", treatmentAreas: "Relationship Issues, Betrayal and Relational Trauma, Childhood wounds, Narcissistic Abuse Recovery, Family Estrangement, Anxiety, Depression, Grief/Loss, Gender/Sexuality", typesOfTherapists: "Therapist", imgSrc: "https://via.placeholder.com/150", link: "#" },
+      { name: "Shikha Seeboruth", title: "Founder and Clinical Director", location: "Virtual", services: "Individual Therapy, Couples Therapy, Workshops", treatmentAreas: "Relationship Issues, Relational Trauma and PTSD, Attachment Wounds, Childhood Trauma, Narcissistic Abuse Recovery", typesOfTherapists: "Founder and Clinical Director", imgSrc: "https://via.placeholder.com/150", link: "#" },
     ];
 
-    // Function to generate person cards
+    // Function to generate person cards dynamically
     function generatePersonCards(people) {
-      const personListElement = document.getElementById("person-list");
-      personListElement.innerHTML = ''; // Clear previous content
+      const personList = document.getElementById('person-list');
+      personList.innerHTML = '';
 
       people.forEach(person => {
         const card = document.createElement('div');
         card.classList.add('person-card');
-        card.innerHTML = `        
-                <a href="${person.link}">
-                    <img src="${person.imgSrc}" alt="${person.name}">
-                    <h3>${person.name}</h3>
-                    <p>${person.title}</p>
-                    <p>${person.location} | ${person.services} | ${person.treatmentAreas} | ${person.typesOfTherapists}</p>
-                    <button class="read-more-btn">Read Bio</button>
-                </a>
-            `;
-        personListElement.appendChild(card);
+        card.innerHTML = `
+          <img src="${person.imgSrc}" alt="${person.name}">
+          <h3>${person.name}</h3>
+          <p><strong>Immediate Availability:</strong> ${person.location}</p>
+          <p><strong>Specializes in:</strong> ${person.treatmentAreas}</p>
+          <p><strong>Offers:</strong> ${person.services}</p>
+          <p><strong>Format:</strong> ${person.location}</p>
+          <a href="${person.link}" class="read-more-btn">Read Bio</a>
+        `;
+        personList.appendChild(card);
       });
     }
 
-    // Function to filter the list
+    // Initialize the page
+    generatePersonCards(people);
+
+    // Filtering function
     function filterList() {
       const locationFilter = document.getElementById("location-filter").value.toLowerCase();
       const servicesFilter = document.getElementById("services-filter").value.toLowerCase();
@@ -268,20 +285,17 @@
 
       const filteredPeople = people.filter(person => {
         return (
-          (!locationFilter || person.location.toLowerCase() === locationFilter) &&
-          (!servicesFilter || person.services.toLowerCase().includes(servicesFilter)) &&
-          (!treatmentAreasFilter || person.treatmentAreas.toLowerCase().includes(treatmentAreasFilter)) &&
-          (!typesOfTherapistsFilter || person.typesOfTherapists.toLowerCase() === typesOfTherapistsFilter)
+          (locationFilter === '' || person.location.toLowerCase().includes(locationFilter)) &&
+          (servicesFilter === '' || person.services.toLowerCase().includes(servicesFilter)) &&
+          (treatmentAreasFilter === '' || person.treatmentAreas.toLowerCase().includes(treatmentAreasFilter)) &&
+          (typesOfTherapistsFilter === '' || person.typesOfTherapists.toLowerCase().includes(typesOfTherapistsFilter))
         );
       });
 
       generatePersonCards(filteredPeople);
     }
 
-    // Initialize the filters and render the first batch of cards
-    generatePersonCards(people);
   </script>
-
 </body>
 
 </html>
