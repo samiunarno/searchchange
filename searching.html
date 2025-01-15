@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abraham Accords Year In Review (2022)</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f7f6;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 2.5em;
+      color: #333;
+    }
+
+    .filters {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .filters input,
+    .filters select {
+      padding: 10px 15px;
+      font-size: 1em;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #fff;
+    }
+
+    .filters input:focus,
+    .filters select:focus {
+      outline: none;
+      border-color: #007BFF;
+    }
+
+    .person-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+    }
+
+    .person-card {
+      background: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      width: 280px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-decoration: none;
+      color: #333;
+    }
+
+    .person-card img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 20px;
+    }
+
+    .person-card h3 {
+      font-size: 1.4em;
+      margin-bottom: 10px;
+      font-weight: 600;
+      color: #007BFF;
+    }
+
+    .person-card p {
+      font-size: 0.95em;
+      margin-bottom: 10px;
+      color: #666;
+    }
+
+    .person-card p a {
+      color: #007BFF;
+      text-decoration: none;
+    }
+
+    .person-card p a:hover {
+      text-decoration: underline;
+    }
+
+    .person-card a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Hover effects for cards */
+    .person-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+    }
+
+    .person-card:hover img {
+      transform: scale(1.1);
+      transition: transform 0.3s ease;
+    }
+
+    /* Read More button styling */
+    .read-more-btn {
+      display: inline-block;
+      padding: 12px 20px;
+      font-size: 1em;
+      font-weight: 600;
+      color: #fff;
+      background-color: #007BFF;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+      margin-top: 15px;
+      text-align: center;
+    }
+
+    /* Removing hover effect */
+    .read-more-btn:hover {
+      background-color: #007BFF;
+      transform: none;
+    }
+
+    .read-more-btn:active {
+      background-color: #007BFF;
+      transform: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>Abraham Accords Year In Review (2022)</h1>
+
+    <div class="filters">
+      <input type="text" id="search" placeholder="Search..." onkeyup="filterList()">
+      <select id="country-filter" onchange="filterList()">
+        <option value="">Select Country</option>
+        <option value="UAE">UAE</option>
+        <option value="Israel">Israel</option>
+        <option value="Bahrain">Bahrain</option>
+      </select>
+      <select id="topic-filter" onchange="filterList()">
+        <option value="">Select Topic</option>
+        <option value="Business">Business</option>
+        <option value="Diplomacy">Diplomacy</option>
+        <option value="Innovation">Innovation</option>
+      </select>
+      <select id="designation-filter" onchange="filterList()">
+        <option value="">Select Designation</option>
+        <option value="Ambassador">Ambassador</option>
+        <option value="CEO">CEO</option>
+        <option value="Director">Director</option>
+      </select>
+    </div>
+
+    <div id="person-list" class="person-list">
+      <!-- Dynamic list of people will be inserted here -->
+    </div>
+  </div>
+
+  <script>
+    // Full data with all entries
+    const people = [
+      { name: "Fleur Hassan-Nahoum", title: "Co-Founder, UAE-Israel Business Council", country: "UAE", topic: "Business", designation: "Co-Founder", imgSrc: "https://www.oecd.org/adobe/dynamicmedia/deliver/dm-aid--41f28e9f-8a8f-47b9-b278-68a59c8f8e2a/107182c8-en.jpg?quality=80&preferwebp=true", link: "https://www.oecd.org/adobe/dynamicmedia/deliver/dm-aid--41f28e9f-8a8f-47b9-b278-68a59c8f8e2a/107182c8-en.jpg?quality=80&preferwebp=true" },
+      { name: "Amb. Aviva Raz Shechter", title: "Ambassador, Special Envoy for Women, Peace & Security", country: "Israel", topic: "Diplomacy", designation: "Ambassador", imgSrc: "https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-800x525.jpg", link: "#" },
+      { name: "Amb. Houda Nonoo", title: "Former Ambassador of Bahrain to the United States", country: "Bahrain", topic: "Diplomacy", designation: "Ambassador", imgSrc: "https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-800x525.jpg", link: "#" },
+      { name: "Amb. Amir Hayek", title: "Israel’s Ambassador to the UAE", country: "Israel", topic: "Diplomacy", designation: "Ambassador", imgSrc: "https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-800x525.jpg", link: "#" },
+      { name: "Aryeh Lightstone", title: "Special Envoy for Economic Normalization (ret.)", country: "Israel", topic: "Business", designation: "Special Envoy", imgSrc: "https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-800x525.jpg", link: "#" },
+      { name: "Jon Medved", title: "CEO and Founder, OurCrowd", country: "Israel", topic: "Innovation", designation: "CEO", imgSrc: "https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-800x525.jpg", link: "#" },
+      { name: "Robert Greenway", title: "President and Executive Director, Abraham Accords Institute", country: "Israel", topic: "Diplomacy", designation: "Director", imgSrc: "https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-800x525.jpg", link: "#" },
+      { name: "Shabib A. Bin Shabib", title: "CEO, Marfa Advisors", country: "UAE", topic: "Business", designation: "CEO", imgSrc: "https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-800x525.jpg", link: "#" },
+      { name: "Jason Isaacson", title: "Chief Policy and Political Affairs Officer, AJC", country: "Israel", topic: "Diplomacy", designation: "Chief Policy Officer", imgSrc: "https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-800x525.jpg", link: "#" },
+      { name: "Gidon Bromberg", title: "Co-Director, EcoPeace Middle East", country: "Israel", topic: "Diplomacy", designation: "Co-Director", imgSrc: "https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-800x525.jpg", link: "#" },
+      { name: "Tareq Abu Hamed", title: "Executive Director, The Arava Institute", country: "Israel", topic: "Innovation", designation: "Executive Director", imgSrc: "https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-800x525.jpg", link: "#" },
+      { name: "Dr. Daphne Richemond Barak", title: "Assistant Professor, Lauder School of Government", country: "Israel", topic: "Innovation", designation: "Assistant Professor", imgSrc: "https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-800x525.jpg", link: "#" },
+      { name: "Eitan Neishlos", title: "Businessman and Philanthropist", country: "Israel", topic: "Business", designation: "President and Founder", imgSrc: "https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-800x525.jpg", link: "#" },
+      { name: "Ahdeya Ahmed Alsayed", title: "Journalist and Former Head of the Bahrain Journalists Association", country: "Bahrain", topic: "Diplomacy", designation: "Journalist", imgSrc: "https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-800x525.jpg", link: "#" },
+      { name: "Jon Medved", title: "CEO and Founder, OurCrowd", country: "Israel", topic: "Innovation", designation: "CEO", imgSrc: "https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-800x525.jpg", link: "#" },
+      { name: "Benjamin Taylor", title: "Marketing Operations Manager, Emirates", country: "UAE", topic: "Business", designation: "Marketing Manager", imgSrc: "https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-800x525.jpg", link: "#" },
+      { name: "Daniel Bernard", title: "Founder, Kick Off", country: "UAE", topic: "Business", designation: "Founder", imgSrc: "https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-800x525.jpg", link: "#" },
+      { name: "Deepti Ramachandran", title: "Former Protocol and Liaison Manager, Israel Pavilion - Expo 2020 Dubai", country: "UAE", topic: "Diplomacy", designation: "Protocol Manager", imgSrc: "https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-800x525.jpg", link: "#" },
+      { name: "Offer Fabian", title: "President, Rugby Israel", country: "Israel", topic: "Innovation", designation: "President", imgSrc: "https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-800x525.jpg", link: "#" },
+      { name: "Shabib A. Bin Shabib", title: "CEO, Marfa Advisors", country: "UAE", topic: "Business", designation: "CEO", imgSrc: "https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-800x525.jpg", link: "#" }
+    ];
+
+    // Function to generate person cards
+    function generatePersonCards(people) {
+      const personListElement = document.getElementById("person-list");
+      personListElement.innerHTML = ''; // Clear previous content
+
+      people.forEach(person => {
+        const card = document.createElement('div');
+        card.classList.add('person-card');
+        card.innerHTML = `
+                <a href="${person.link}">
+                    <img src="${person.imgSrc}" alt="${person.name}">
+                    <h3>${person.name}</h3>
+                    <p>${person.title}</p>
+                    <p>${person.country} | ${person.topic} | ${person.designation}</p>
+                    <button class="read-more-btn">Read More</button>
+                </a>
+            `;
+        personListElement.appendChild(card);
+      });
+    }
+
+    // Function to filter the list
+    function filterList() {
+      const search = document.getElementById("search").value.toLowerCase();
+      const countryFilter = document.getElementById("country-filter").value.toLowerCase();
+      const topicFilter = document.getElementById("topic-filter").value.toLowerCase();
+      const designationFilter = document.getElementById("designation-filter").value.toLowerCase();
+
+      const filteredPeople = people.filter(person => {
+        return (person.name.toLowerCase().includes(search) &&
+          (!countryFilter || person.country.toLowerCase() === countryFilter) &&
+          (!topicFilter || person.topic.toLowerCase() === topicFilter) &&
+          (!designationFilter || person.designation.toLowerCase() === designationFilter));
+      });
+
+      generatePersonCards(filteredPeople);
+    }
+
+    // Initial render of all person cards
+    generatePersonCards(people);
+  </script>
+
+</body>
+
+</html>
