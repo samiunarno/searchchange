@@ -4,8 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Abraham Accords Year In Review (2022)</title>
+  <title>Our Therapists</title>
   <style>
+    /* CSS as before */
     * {
       margin: 0;
       padding: 0;
@@ -14,7 +15,7 @@
 
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f4f7f6;
+      background-color: transparent;
       color: #333;
       line-height: 1.6;
     }
@@ -74,9 +75,8 @@
     }
 
     .person-card img {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
+      width: 200px;
+      height: 200px;
       object-fit: cover;
       margin-bottom: 20px;
     }
@@ -137,7 +137,7 @@
 
     /* Removing hover effect */
     .read-more-btn:hover {
-      background-color: #007BFF;
+      background-color: #f874f2;
       transform: none;
     }
 
@@ -151,58 +151,49 @@
 <body>
 
   <div class="container">
-    <h1>Abraham Accords Year In Review (2022)</h1>
+    <h1>Meet Our Therapists</h1>
 
     <div class="filters">
       <input type="text" id="search" placeholder="Search..." onkeyup="filterList()">
-      <select id="country-filter" onchange="filterList()">
-        <option value="">Select Country</option>
-        <option value="UAE">UAE</option>
-        <option value="Israel">Israel</option>
-        <option value="Bahrain">Bahrain</option>
+      <select id="location-filter" onchange="filterList()">
+        <option value="">Select Location</option>
+        <!-- Location options will be populated here -->
       </select>
-      <select id="topic-filter" onchange="filterList()">
-        <option value="">Select Topic</option>
-        <option value="Business">Business</option>
-        <option value="Diplomacy">Diplomacy</option>
-        <option value="Innovation">Innovation</option>
+      <select id="services-filter" onchange="filterList()">
+        <option value="">Select Service</option>
+        <option value="Affordable Therapy">Affordable Therapy</option>
+        <option value="Individual Therapy">Individual Therapy</option>
+        <option value="Couples Therapy">Couples Therapy</option>
+        <option value="Family Therapy">Family Therapy</option>
+        <option value="Teen Therapy">Teen Therapy</option>
+        <option value="Workshops">Workshops</option>
       </select>
-      <select id="designation-filter" onchange="filterList()">
-        <option value="">Select Designation</option>
-        <option value="Ambassador">Ambassador</option>
-        <option value="CEO">CEO</option>
-        <option value="Director">Director</option>
+      <select id="types-of-therapists-filter" onchange="filterList()">
+        <option value="">Select Type of Therapist</option>
+        <option value="Therapist">Therapist</option>
+        <option value="Founder and Clinical Director">Founder and Clinical Director</option>
       </select>
     </div>
 
     <div id="person-list" class="person-list">
-      <!-- Dynamic list of people will be inserted here -->
+      <!-- Dynamic list of therapists will be inserted here -->
     </div>
   </div>
 
   <script>
-    // Full data with all entries
+    // New therapists data with updated attributes
     const people = [
-      { name: "Fleur Hassan-Nahoum", title: "Co-Founder, UAE-Israel Business Council", country: "UAE", topic: "Business", designation: "Co-Founder", imgSrc: "https://www.oecd.org/adobe/dynamicmedia/deliver/dm-aid--41f28e9f-8a8f-47b9-b278-68a59c8f8e2a/107182c8-en.jpg?quality=80&preferwebp=true", link: "https://www.oecd.org/adobe/dynamicmedia/deliver/dm-aid--41f28e9f-8a8f-47b9-b278-68a59c8f8e2a/107182c8-en.jpg?quality=80&preferwebp=true" },
-      { name: "Amb. Aviva Raz Shechter", title: "Ambassador, Special Envoy for Women, Peace & Security", country: "Israel", topic: "Diplomacy", designation: "Ambassador", imgSrc: "https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-800x525.jpg", link: "#" },
-      { name: "Amb. Houda Nonoo", title: "Former Ambassador of Bahrain to the United States", country: "Bahrain", topic: "Diplomacy", designation: "Ambassador", imgSrc: "https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-800x525.jpg", link: "#" },
-      { name: "Amb. Amir Hayek", title: "Israel’s Ambassador to the UAE", country: "Israel", topic: "Diplomacy", designation: "Ambassador", imgSrc: "https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-800x525.jpg", link: "#" },
-      { name: "Aryeh Lightstone", title: "Special Envoy for Economic Normalization (ret.)", country: "Israel", topic: "Business", designation: "Special Envoy", imgSrc: "https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-800x525.jpg", link: "#" },
-      { name: "Jon Medved", title: "CEO and Founder, OurCrowd", country: "Israel", topic: "Innovation", designation: "CEO", imgSrc: "https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-800x525.jpg", link: "#" },
-      { name: "Robert Greenway", title: "President and Executive Director, Abraham Accords Institute", country: "Israel", topic: "Diplomacy", designation: "Director", imgSrc: "https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-800x525.jpg", link: "#" },
-      { name: "Shabib A. Bin Shabib", title: "CEO, Marfa Advisors", country: "UAE", topic: "Business", designation: "CEO", imgSrc: "https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-800x525.jpg", link: "#" },
-      { name: "Jason Isaacson", title: "Chief Policy and Political Affairs Officer, AJC", country: "Israel", topic: "Diplomacy", designation: "Chief Policy Officer", imgSrc: "https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-800x525.jpg", link: "#" },
-      { name: "Gidon Bromberg", title: "Co-Director, EcoPeace Middle East", country: "Israel", topic: "Diplomacy", designation: "Co-Director", imgSrc: "https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-800x525.jpg", link: "#" },
-      { name: "Tareq Abu Hamed", title: "Executive Director, The Arava Institute", country: "Israel", topic: "Innovation", designation: "Executive Director", imgSrc: "https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-800x525.jpg", link: "#" },
-      { name: "Dr. Daphne Richemond Barak", title: "Assistant Professor, Lauder School of Government", country: "Israel", topic: "Innovation", designation: "Assistant Professor", imgSrc: "https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-800x525.jpg", link: "#" },
-      { name: "Eitan Neishlos", title: "Businessman and Philanthropist", country: "Israel", topic: "Business", designation: "President and Founder", imgSrc: "https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-800x525.jpg", link: "#" },
-      { name: "Ahdeya Ahmed Alsayed", title: "Journalist and Former Head of the Bahrain Journalists Association", country: "Bahrain", topic: "Diplomacy", designation: "Journalist", imgSrc: "https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-800x525.jpg", link: "#" },
-      { name: "Jon Medved", title: "CEO and Founder, OurCrowd", country: "Israel", topic: "Innovation", designation: "CEO", imgSrc: "https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-800x525.jpg", link: "#" },
-      { name: "Benjamin Taylor", title: "Marketing Operations Manager, Emirates", country: "UAE", topic: "Business", designation: "Marketing Manager", imgSrc: "https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-800x525.jpg", link: "#" },
-      { name: "Daniel Bernard", title: "Founder, Kick Off", country: "UAE", topic: "Business", designation: "Founder", imgSrc: "https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-800x525.jpg", link: "#" },
-      { name: "Deepti Ramachandran", title: "Former Protocol and Liaison Manager, Israel Pavilion - Expo 2020 Dubai", country: "UAE", topic: "Diplomacy", designation: "Protocol Manager", imgSrc: "https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-800x525.jpg", link: "#" },
-      { name: "Offer Fabian", title: "President, Rugby Israel", country: "Israel", topic: "Innovation", designation: "President", imgSrc: "https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-800x525.jpg", link: "#" },
-      { name: "Shabib A. Bin Shabib", title: "CEO, Marfa Advisors", country: "UAE", topic: "Business", designation: "CEO", imgSrc: "https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-800x525.jpg", link: "#" }
+      { name: "Maria Carreon", title: "Therapist", location: "Virtual", services: "Affordable Therapy, Individual Therapy, Family Therapy, Teen Therapy", typesOfTherapists: "Therapist", imgSrc: "https://images.squarespace-cdn.com/content/v1/640f7769e9fa4568de68043e/e68cb9f5-3bea-4100-8bf8-526626f1fc54/IMG_4499.png?format=500w", link: "https://www.thetherapeuticway.ca/maria-carreon" },
+      { name: "Kaitlyn Fox", title: "Therapist", location: "Virtual", services: "Affordable Therapy, Individual Therapy, Teen Therapy", typesOfTherapists: "Therapist", imgSrc: "https://via.placeholder.com/150", link: "#" },
+      { name: "Erin Coffell", title: "Therapist", location: "Virtual", services: "Individual Therapy, Teen Therapy", typesOfTherapists: "Therapist", imgSrc: "https://via.placeholder.com/150", link: "#" },
+      { name: "Vidhi Joshi", title: "Therapist", location: "4145 North Services Rd.", services: "Individual Therapy, Couples Therapy, Family Therapy, Teen Therapy, EMDR Therapy", typesOfTherapists: "Therapist", imgSrc: "https://via.placeholder.com/150", link: "#" },
+      { name: "Syeda Zaidi", title: "Therapist", location: "3344 Mainway", services: "Individual Therapy, Couples Therapy, Family Therapy, Teen Therapy", typesOfTherapists: "Therapist", imgSrc: "https://via.placeholder.com/150", link: "#" },
+      { name: "Anumeet Sandhu", title: "Therapist", location: "3344 Mainway", services: "Individual Therapy", typesOfTherapists: "Therapist", imgSrc: "https://via.placeholder.com/150", link: "#" },
+      { name: "Caroline Martini", title: "Therapist", location: "Virtual", services: "Affordable Therapy, Individual Therapy, Couples Therapy, Family Therapy, Teen Therapy", typesOfTherapists: "Therapist", imgSrc: "https://via.placeholder.com/150", link: "#" },
+      { name: "Krista MacKenzie", title: "Therapist", location: "4145 North Services Rd.", services: "Individual Therapy, Couples Therapy, Family Therapy, Teen Therapy", typesOfTherapists: "Therapist", imgSrc: "https://via.placeholder.com/150", link: "#" },
+      { name: "Vrushalee Nachar", title: "Therapist", location: "Virtual", services: "Individual Therapy, Couples Therapy, Workshops, Group Therapy", typesOfTherapists: "Therapist", imgSrc: "https://via.placeholder.com/150", link: "#" },
+      { name: "Samantha Burns", title: "Therapist", location: "Virtual", services: "Individual Therapy, Couples Therapy, Family Therapy, Teen Therapy", typesOfTherapists: "Therapist", imgSrc: "https://via.placeholder.com/150", link: "#" },
+      { name: "Shikha Seeboruth", title: "Founder and Clinical Director", location: "Virtual", services: "Individual Therapy, Couples Therapy, Workshops", typesOfTherapists: "Founder and Clinical Director", imgSrc: "https://via.placeholder.com/150", link: "#" }
     ];
 
     // Function to generate person cards
@@ -218,32 +209,46 @@
                     <img src="${person.imgSrc}" alt="${person.name}">
                     <h3>${person.name}</h3>
                     <p>${person.title}</p>
-                    <p>${person.country} | ${person.topic} | ${person.designation}</p>
-                    <button class="read-more-btn">Read More</button>
+                    <p>${person.location} | ${person.services} | ${person.typesOfTherapists}</p>
+                    <button class="read-more-btn">Read Bio</button>
                 </a>
             `;
         personListElement.appendChild(card);
       });
     }
 
+    // Function to generate unique location filter options dynamically
+    function generateLocationFilter() {
+      const locationFilter = document.getElementById("location-filter");
+      const locations = [ ...new Set(people.map(person => person.location)) ]; // Extract unique locations
+
+      locations.forEach(location => {
+        const option = document.createElement('option');
+        option.value = location;
+        option.textContent = location;
+        locationFilter.appendChild(option);
+      });
+    }
+
     // Function to filter the list
     function filterList() {
       const search = document.getElementById("search").value.toLowerCase();
-      const countryFilter = document.getElementById("country-filter").value.toLowerCase();
-      const topicFilter = document.getElementById("topic-filter").value.toLowerCase();
-      const designationFilter = document.getElementById("designation-filter").value.toLowerCase();
+      const locationFilter = document.getElementById("location-filter").value.toLowerCase();
+      const servicesFilter = document.getElementById("services-filter").value.toLowerCase();
+      const typesOfTherapistsFilter = document.getElementById("types-of-therapists-filter").value.toLowerCase();
 
       const filteredPeople = people.filter(person => {
         return (person.name.toLowerCase().includes(search) &&
-          (!countryFilter || person.country.toLowerCase() === countryFilter) &&
-          (!topicFilter || person.topic.toLowerCase() === topicFilter) &&
-          (!designationFilter || person.designation.toLowerCase() === designationFilter));
+          (!locationFilter || person.location.toLowerCase() === locationFilter) &&
+          (!servicesFilter || person.services.toLowerCase().includes(servicesFilter)) &&
+          (!typesOfTherapistsFilter || person.typesOfTherapists.toLowerCase() === typesOfTherapistsFilter));
       });
 
       generatePersonCards(filteredPeople);
     }
 
-    // Initial render of all person cards
+    // Initialize the filters and render the first batch of cards
+    generateLocationFilter();
     generatePersonCards(people);
   </script>
 
