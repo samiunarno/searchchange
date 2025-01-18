@@ -2,11 +2,11 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Our Therapists</title>
   <style>
-    /* CSS for styling the page */
+    /* Global Styles */
     * {
       margin: 0;
       padding: 0;
@@ -14,7 +14,7 @@
     }
 
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       background-color: #f4f6f9;
       color: #333;
       line-height: 1.6;
@@ -33,139 +33,188 @@
       color: #333;
     }
 
+    /* Filter Container */
     .filters {
       display: flex;
       justify-content: center;
       gap: 20px;
-      margin-bottom: 30px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .filters select,
+    .search-bar {
+      padding: 12px 20px;
+      font-size: 1em;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background-color: #fff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .filters select:focus,
+    .search-bar:focus {
+      outline: none;
+      border-color: #007bff;
+      box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+    }
+
+    .search-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-bar {
+      width: 300px;
+    }
+
+    .search-bar::placeholder {
+      color: #aaa;
+    }
+
+    .dropdown {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background-color: #fff;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+      z-index: 100;
+    }
+
+    .dropdown label {
+      display: block;
+      margin-bottom: 8px;
+      cursor: pointer;
+    }
+
+    .dropdown input[type="checkbox"] {
+      margin-right: 10px;
+    }
+
+    .filters select,
+    .search-container {
+      flex: 1;
+      max-width: 300px;
     }
 
     .filters select {
-      padding: 10px 15px;
-      font-size: 1em;
-      border: 1px solid #000000;
-      border-radius: 40px;
-      background-color: #fff;
+      border-radius: 5px;
     }
 
-    .filters select:focus {
-      outline: none;
-      border-color: #007BFF;
+    .search-bar {
+      padding-right: 40px;
+      /* to accommodate the arrow icon */
     }
 
+    .arrow-icon {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.2em;
+      cursor: pointer;
+      color: #007bff;
+      transition: all 0.3s ease;
+    }
+
+    .arrow-icon:hover {
+      color: #0056b3;
+    }
+
+    /* Cards Layout */
     .person-list {
-      display: flex;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       gap: 30px;
       justify-content: space-between;
+      margin-top: 40px;
     }
 
     .person-card {
-      background: rgb(224, 212, 196);
+      background: #fff;
       padding: 20px;
-      border-radius: 40px;
+      border-radius: 10px;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      width: calc(33.333% - 20px);
-      /* Three cards per row with space between */
-      text-align: center;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      text-decoration: none;
+      text-align: center;
       color: #333;
+      text-decoration: none;
+    }
+
+    .person-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     }
 
     .person-card img {
-      width: 200px;
-      height: 200px;
+      width: 100%;
+      height: 250px;
       object-fit: cover;
+      border-radius: 8px;
       margin-bottom: 20px;
     }
 
     .person-card h3 {
-      font-size: 1.4em;
+      font-size: 1.5em;
       margin-bottom: 10px;
       font-weight: 600;
-      color: #007BFF;
+      color: #007bff;
     }
 
     .person-card p {
       font-size: 0.95em;
       margin-bottom: 10px;
-      color: #666;
     }
 
-    .person-card p a {
-      color: #007BFF;
-      text-decoration: none;
-    }
-
-    .person-card p a:hover {
-      text-decoration: underline;
-    }
-
-    .person-card a {
-      text-decoration: none;
-      color: white;
-    }
-
-    /* Hover effects for cards */
-    .person-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
-    }
-
-    .person-card:hover img {
-      transform: scale(1.1);
-      transition: transform 0.3s ease;
-    }
-
-    /* Read More button styling */
-    .read-more-btn {
+    .person-card .read-more-btn {
       display: inline-block;
       padding: 12px 20px;
       font-size: 1em;
       font-weight: 600;
       color: #fff;
-      background-color: #a07c0c;
+      background-color: #007bff;
       border: none;
       border-radius: 5px;
       cursor: pointer;
       text-decoration: none;
       margin-top: 15px;
-      text-align: center;
+      transition: background-color 0.3s ease;
     }
 
-    /* Removing hover effect */
-    .read-more-btn:hover {
-      background-color: #a07c0c;
-      transform: none;
+    .person-card .read-more-btn:hover {
+      background-color: #0056b3;
     }
 
-    .read-more-btn:active {
-      background-color: #443300;
-      transform: none;
+    .person-card .read-more-btn:active {
+      background-color: #003d82;
     }
 
-    @media (max-width: 1200px) {
-      .person-card {
-        width: calc(50% - 20px);
-        /* Two cards per row on smaller screens */
-      }
-    }
-
+    /* Responsive */
     @media (max-width: 768px) {
-      .person-card {
+      .filters {
+        flex-direction: column;
+      }
+
+      .search-bar {
         width: 100%;
-        /* One card per row on mobile */
       }
     }
   </style>
 </head>
 
 <body>
-
   <div class="container">
     <h1>Meet Our Therapists</h1>
 
+    <!-- Filter Section -->
     <div class="filters">
       <select id="location-filter" onchange="filterList()">
         <option value="">Location</option>
@@ -179,122 +228,139 @@
         <option value="Couples Therapy">Couples Therapy</option>
         <option value="Family Therapy">Family Therapy</option>
         <option value="Teen Therapy">Teen Therapy</option>
-        <option value="Workshops">Workshops</option>
-      </select>
-      <select id="treatment-areas-filter" onchange="filterList()">
-        <option value="">Select Treatment Areas</option>
-        <option value="EMDR Therapy">EMDR Therapy</option>
-        <option value="Trauma Therapy">Trauma Therapy</option>
-        <option value="Anxiety and Depression">Anxiety and Depression</option>
-        <option value="Couples Therapy">Couples Therapy</option>
-        <option value="Addiction/Substance Use">Addiction/Substance Use</option>
-        <option value="ADHD">ADHD</option>
-        <option value="Adult Children of Emotionally Immature Parents">Adult Children of Emotionally Immature Parents
-        </option>
-        <option value="Anxiety">Anxiety</option>
-        <option value="Attachment Wounds">Attachment Wounds</option>
-        <option value="Bipolar Disorder">Bipolar Disorder</option>
-        <option value="Borderline Personality Disorder">Borderline Personality Disorder</option>
-        <option value="Break-up, Separation, and Divorce">Break-up, Separation, and Divorce</option>
-        <option value="Childhood Trauma">Childhood Trauma</option>
-        <option value="Chronic Pain and Illness">Chronic Pain and Illness</option>
-        <option value="Codependency">Codependency</option>
-        <option value="Depression">Depression</option>
-        <option value="Domestic Abuse or Violence">Domestic Abuse or Violence</option>
-        <option value="Family Estrangement">Family Estrangement</option>
-        <option value="Gender and Sexuality">Gender and Sexuality</option>
-        <option value="Grief and Loss">Grief and Loss</option>
-        <option value="Infidelity">Infidelity</option>
-        <option value="Intergenerational Trauma">Intergenerational Trauma</option>
-        <option value="Life Coaching/ Life Transition">Life Coaching/ Life Transition</option>
-        <option value="Narcissistic Abuse">Narcissistic Abuse</option>
-        <option value="Relational & Betrayal Trauma">Relational & Betrayal Trauma</option>
-        <option value="Relationship issues">Relationship issues</option>
-        <option value="Parenting">Parenting</option>
-        <option value="Perfectionism & People pleasing">Perfectionism & People pleasing</option>
-        <option value="Perinatal and Postpartum Mental Health">Perinatal and Postpartum Mental Health</option>
-        <option value="Polyamorous relationships">Polyamorous relationships</option>
-        <option value="Post-separation abuse">Post-separation abuse</option>
-        <option value="Self-esteem & confidence">Self-esteem & confidence</option>
-        <option value="Stress & Burnout">Stress & Burnout</option>
-        <option value="Suicidal thoughts/Self-harm">Suicidal thoughts/Self-harm</option>
-        <option value="Trauma & PTSD">Trauma & PTSD</option>
-        <option value="2SLGBTQ++ Stressors">2SLGBTQ++ Stressors</option>
+        <option value="Workshops and Groups">Workshops and Groups</option>
       </select>
       <select id="types-of-therapists-filter" onchange="filterList()">
         <option value="">Select Type of Therapist</option>
         <option value="Therapist">Therapist</option>
         <option value="Founder and Clinical Director">Founder and Clinical Director</option>
-        <option value="Registered Psychotherapist">Registered Psychotherapist</option>
-        <option value="Social Worker">Social Worker</option>
-        <option value="Intern Therapist">Intern Therapist</option>
       </select>
+      <div class="search-container">
+        <input type="text" id="search-bar" class="search-bar" placeholder="Search Treatment Areas..."
+          onclick="toggleDropdown()" />
+        <div id="dropdown" class="dropdown">
+          <label><input type="checkbox" value="ADHD" onchange="filterList()"> ADHD</label>
+          <label><input type="checkbox" value="Anxiety" onchange="filterList()"> Anxiety</label>
+          <label><input type="checkbox" value="Depression" onchange="filterList()"> Depression</label>
+          <label><input type="checkbox" value="Stress" onchange="filterList()"> Stress</label>
+          <label><input type="checkbox" value="Grief" onchange="filterList()"> Grief</label>
+        </div>
+        <span class="arrow-icon" onclick="toggleDropdown()">&#9660;</span>
+      </div>
     </div>
 
+    <!-- People List -->
     <div id="person-list" class="person-list">
       <!-- Dynamic list of therapists will be inserted here -->
     </div>
   </div>
 
   <script>
-    // Therapists data with new detailed information
     const people = [
-      { name: "Maria Carreon", title: "Therapist", location: "Virtual", services: "Affordable Therapy, Individual Therapy, Family Therapy, Teen Therapy", treatmentAreas: "Relationship Issues, Relational Trauma, Childhood and Attachment Wounds, Narcissistic Abuse Recovery, Family Estrangement, Parenting, Breakup/Separation/Divorce, ADHD, Anxiety, Depression, Grief/Loss, Stress & Burnout, Codependency", typesOfTherapists: "Therapist", imgSrc: "https://images.squarespace-cdn.com/content/v1/640f7769e9fa4568de68043e/444ac106-e7c5-42a4-b970-2d111a939054/The+Therapeutic+Way+%283%29.jpg?format=750w", link: "#" },
-      { name: "Kaitlyn Fox", title: "Therapist", location: "Virtual", services: "Affordable Therapy, Individual Therapy, Teen Therapy", treatmentAreas: "Relationship Issues, Betrayal and Relational Trauma, Childhood and Attachment Wounds, Narcissistic Abuse Recovery, Family Estrangement, Anxiety, Depression, Grief/Loss, Stress & Burnout", typesOfTherapists: "Therapist", imgSrc: "https://via.placeholder.com/150", link: "#" },
-      { name: "Erin Coffell", title: "Therapist", location: "Virtual", services: "Individual Therapy, Teen Therapy", treatmentAreas: "Relationship Issues, Relational Trauma, Childhood and Attachment wounds, Narcissistic Abuse Recovery, Anxiety, Stress & Burnout, Family Estrangement, Grief/Loss, Chronic Illness and Pain, LGBTQ+ stressors", typesOfTherapists: "Therapist", imgSrc: "https://via.placeholder.com/150", link: "#" },
-      { name: "Vidhi Joshi", title: "Therapist", location: "In-Person", services: "Individual Therapy, Couples Therapy, Family Therapy, Teen Therapy, EMDR Therapy", treatmentAreas: "Relationship Issues, Relational Trauma, Narcissistic Abuse Recovery, C-PTSD, Attachment Wounds, Childhood Trauma, Stress & Burnout, Life Transitions, Grief/Loss, Chronic Illness, Anxiety, Depression, Family Estrangement (Parents and/or Adult children)", typesOfTherapists: "Therapist", imgSrc: "https://via.placeholder.com/150", link: "#" },
-      { name: "Syeda Zaidi", title: "Therapist", location: "In-Person", services: "Individual therapy, Couples therapy, Family therapy, Teen therapy", treatmentAreas: "Relationship Issues, Relational Trauma, C-PTSD, Childhood Trauma, Intergenerational Trauma, Narcissistic Abuse Recovery, ADHD, Domestic Violence, Perinatal and Postpartum Mental Health, Anxiety", typesOfTherapists: "Therapist", imgSrc: "https://via.placeholder.com/150", link: "#" },
-      { name: "Anumeet Sandhu", title: "Therapist", location: "In-Person", services: "Individual therapy", treatmentAreas: "Relationship Issues, Narcissistic Abuse Recovery, Attachment Wounds, Intergenerational Trauma, Relational Trauma & Breakdown (Divorce, Infidelity, Separation), Anxiety, Depression, Grief/Loss, LGBTQ+ Relationship challenges, Polyamorous relationship", typesOfTherapists: "Therapist", imgSrc: "https://via.placeholder.com/150", link: "#" },
-      { name: "Caroline Martini", title: "Therapist", location: "Virtual", services: "Affordable therapy, Individual therapy, Couples therapy, Family therapy, Teen therapy", treatmentAreas: "Relationship Issues, Relational Trauma, Childhood wounds, Narcissistic Abuse Recovery, Anxiety, Depression, Stress & Burnout, Grief/Loss, Family Estrangement, Perinatal and Postpartum Mental Health", typesOfTherapists: "Therapist", imgSrc: "https://via.placeholder.com/150", link: "#" },
-      { name: "Krista MacKenzie", title: "Therapist", location: "In-Person", services: "Individual Therapy, Couples Therapy, Family Therapy, Teen Therapy", treatmentAreas: "Marriage and Couples Therapy, Relationship Issues, Narcissistic Abuse Recovery, Attachment Wounds, Stress & Burnout, Anxiety, Depression, Family Estrangement, Bipolar Disorder, Breakups/Separation/Divorce", typesOfTherapists: "Therapist", imgSrc: "https://via.placeholder.com/150", link: "#" },
-      { name: "Vrushalee Nachar", title: "Therapist", location: "Virtual", services: "Individual therapy, Couples therapy, Workshops, and Group Therapy", treatmentAreas: "Relationship Issues, Relational Trauma and PTSD, Attachment wounds, Narcissistic Abuse Recovery, ADHD, Separation/Divorce, Anxiety, and Depression", typesOfTherapists: "Therapist", imgSrc: "https://via.placeholder.com/150", link: "#" },
-      { name: "Samantha Burns", title: "Therapist", location: "Virtual", services: "Individual therapy, Couples therapy, Family therapy, Teen therapy", treatmentAreas: "Relationship Issues, Betrayal and Relational Trauma, Childhood wounds, Narcissistic Abuse Recovery, Family Estrangement, Anxiety, Depression, Grief/Loss, Gender/Sexuality", typesOfTherapists: "Therapist", imgSrc: "https://via.placeholder.com/150", link: "#" },
-      { name: "Shikha Seeboruth", title: "Founder and Clinical Director", location: "Virtual", services: "Individual Therapy, Couples Therapy, Workshops", treatmentAreas: "Relationship Issues, Relational Trauma and PTSD, Attachment Wounds, Childhood Trauma, Narcissistic Abuse Recovery", typesOfTherapists: "Founder and Clinical Director", imgSrc: "https://via.placeholder.com/150", link: "#" },
+      {
+        name: "Maria Carreon",
+        title: "Therapist",
+        location: "Virtual",
+        services: "Affordable Therapy, Individual Therapy, Family Therapy, Teen Therapy",
+        treatmentAreas: "Relationship Issues, Relational Trauma, Childhood and Attachment Wounds, Narcissistic Abuse Recovery, Family Estrangement, Parenting, Breakup/Separation/Divorce, ADHD, Anxiety, Depression, Grief/Loss, Stress & Burnout, Codependency",
+        typesOfTherapists: "Therapist",
+        imgSrc: "https://images.squarespace-cdn.com/content/v1/640f7769e9fa4568de68043e/e68cb9f5-3bea-4100-8bf8-526626f1fc54/IMG_4499.png?format=750w",
+        link: "https://www.thetherapeuticway.ca/maria-carreon"
+      },
+      {
+        name: "Kaitlyn Fox",
+        title: "Therapist",
+        location: "Virtual",
+        services: "Affordable Therapy, Individual Therapy, Teen Therapy",
+        treatmentAreas: "Relationship Issues, Betrayal and Relational Trauma, Childhood and Attachment Wounds, Narcissistic Abuse Recovery, Family Estrangement, Anxiety, Depression, Grief/Loss, Stress & Burnout",
+        typesOfTherapists: "Therapist",
+        imgSrc: "https://images.squarespace-cdn.com/content/v1/640f7769e9fa4568de68043e/0bc8f867-960c-4a63-9b2e-6ef527893c2e/IMG_0117.jpeg?format=750w",
+        link: "https://www.thetherapeuticway.ca/kaitlyn-fox"
+      },
+      {
+        name: "Erin Coffell",
+        title: "Therapist",
+        location: "Virtual",
+        services: "Individual Therapy, Teen Therapy",
+        treatmentAreas: "Relationship Issues, Relational Trauma, Childhood and Attachment wounds, Narcissistic Abuse Recovery, Anxiety, Stress & Burnout, Family Estrangement, Grief/Loss, Chronic Illness and Pain, LGBTQ+ stressors",
+        typesOfTherapists: "Therapist",
+        imgSrc: "https://images.squarespace-cdn.com/content/v1/640f7769e9fa4568de68043e/d67944e4-3844-4f09-ada9-8ba9e3cc714f/The+Therapeutic+Way+%284%29.jpg?format=1000w",
+        link: "https://www.thetherapeuticway.ca/erincoffell"
+      },
+      {
+        name: "Sarah Mitchell",
+        title: "Therapist",
+        location: "Virtual",
+        services: "Individual Therapy, Family Therapy",
+        treatmentAreas: "Stress, Anxiety, Relationship Issues, Grief, Life Transitions, Codependency",
+        typesOfTherapists: "Therapist",
+        imgSrc: "https://via.placeholder.com/600x400.png?text=Sarah+Mitchell",
+        link: "#"
+      },
+      {
+        name: "John Doe",
+        title: "Founder and Clinical Director",
+        location: "In-Person",
+        services: "Therapist, Workshops and Groups",
+        treatmentAreas: "ADHD, Anxiety, Depression, Stress, Relationship Issues",
+        typesOfTherapists: "Founder and Clinical Director",
+        imgSrc: "https://via.placeholder.com/600x400.png?text=John+Doe",
+        link: "#"
+      }
     ];
 
     // Function to generate person cards dynamically
     function generatePersonCards(people) {
-      const personList = document.getElementById('person-list');
-      personList.innerHTML = '';
+      const personList = document.getElementById("person-list");
+      personList.innerHTML = "";
 
-      people.forEach(person => {
-        const card = document.createElement('div');
-        card.classList.add('person-card');
+      people.forEach((person) => {
+        const card = document.createElement("div");
+        card.classList.add("person-card");
         card.innerHTML = `
           <img src="${person.imgSrc}" alt="${person.name}">
           <h3>${person.name}</h3>
-          <p><strong>Immediate Availability:</strong> ${person.location}</p>
-          <p><strong>Specializes in:</strong> ${person.treatmentAreas}</p>
-          <p><strong>Offers:</strong> ${person.services}</p>
-          <p><strong>Format:</strong> ${person.location}</p>
-          <a href="${person.link}" class="read-more-btn">Read Bio</a>
+          <p><strong>Title:</strong> ${person.title}</p>
+          <p><strong>Location:</strong> ${person.location}</p>
+          <p><strong>Services:</strong> ${person.services}</p>
+          <a href="${person.link}" class="read-more-btn">Read More</a>
         `;
         personList.appendChild(card);
       });
     }
 
-    // Initialize the page
-    generatePersonCards(people);
-
-    // Filtering function
+    // Filter Functionality
     function filterList() {
-      const locationFilter = document.getElementById("location-filter").value.toLowerCase();
-      const servicesFilter = document.getElementById("services-filter").value.toLowerCase();
-      const treatmentAreasFilter = document.getElementById("treatment-areas-filter").value.toLowerCase();
-      const typesOfTherapistsFilter = document.getElementById("types-of-therapists-filter").value.toLowerCase();
+      const location = document.getElementById("location-filter").value;
+      const services = document.getElementById("services-filter").value;
+      const typesOfTherapists = document.getElementById("types-of-therapists-filter").value;
+      const searchValue = document.getElementById("search-bar").value.toLowerCase();
+      const selectedTreatmentAreas = Array.from(document.querySelectorAll("#dropdown input:checked"))
+        .map((checkbox) => checkbox.value.toLowerCase());
 
-      const filteredPeople = people.filter(person => {
-        return (
-          (locationFilter === '' || person.location.toLowerCase().includes(locationFilter)) &&
-          (servicesFilter === '' || person.services.toLowerCase().includes(servicesFilter)) &&
-          (treatmentAreasFilter === '' || person.treatmentAreas.toLowerCase().includes(treatmentAreasFilter)) &&
-          (typesOfTherapistsFilter === '' || person.typesOfTherapists.toLowerCase().includes(typesOfTherapistsFilter))
-        );
+      const filteredPeople = people.filter((person) => {
+        const matchesLocation = location ? person.location.toLowerCase().includes(location.toLowerCase()) : true;
+        const matchesServices = services ? person.services.toLowerCase().includes(services.toLowerCase()) : true;
+        const matchesTypesOfTherapists = typesOfTherapists ? person.typesOfTherapists.toLowerCase().includes(typesOfTherapists.toLowerCase()) : true;
+        const matchesSearch = person.name.toLowerCase().includes(searchValue) || person.treatmentAreas.toLowerCase().includes(searchValue);
+        const matchesTreatmentAreas = selectedTreatmentAreas.every((area) => person.treatmentAreas.toLowerCase().includes(area));
+
+        return matchesLocation && matchesServices && matchesTypesOfTherapists && matchesSearch && matchesTreatmentAreas;
       });
 
       generatePersonCards(filteredPeople);
     }
 
+    // Toggle dropdown visibility
+    function toggleDropdown() {
+      const dropdown = document.getElementById("dropdown");
+      dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+    }
+
+    // Initial load
+    window.onload = () => {
+      generatePersonCards(people);
+    };
   </script>
 </body>
 
