@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SC LED</title>
+    <style>
+    
+
+        .btnContainer {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr); /* Default 6 columns */
+            justify-items: center;
+            justify-content: center;
+            width: 100%;
+            gap: 10px; /* Space between buttons */
+        }
+
+        .selectBntHolder {
+            background: white;
+            border-radius: 10px;
+        }
+
+        .selectBntHolder:hover {
+            cursor: pointer;
+        }
+
+        .selectBtn {
+            width: 100%;
+            padding: 10px 30px;
+            border: none;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .select:focus {
+            border: none;
+            outline: none;
+            box-shadow: none;
+        }
+
+        .searchBtnHolder {
+            justify-self: center;
+            margin-top: 30px;
+        }
+
+        .searchBtn {
+            padding: 15px 30px;
+            border-radius: 10px;
+            background: linear-gradient(to right, orange, rgb(195, 90, 90));
+            box-shadow: 2px 2px 2px rgb(195, 90, 90);
+            border: none;
+        }
+
+        .searchBtn:hover {
+            background: linear-gradient(to right, orange, rgb(233, 83, 98));
+            transition: all 0.5s;
+            cursor: pointer;
+        }
+
+        /* Media Query for Tablets and Smaller Screens */
+        @media screen and (max-width: 1024px) {
+          
+
+            .btnContainer {
+                grid-template-columns: repeat(4, 1fr); /* 4 columns for tablets */
+            }
+            .searchBtnHolder {
+                width: 100%;
+                margin-top: 20px; /* Adjust margin for mobile */
+            }
+            .searchBtn {
+                width: 100%;
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+
+            .selectBtn {
+                padding: 8px 20px;
+                font-size: 14px;
+            }
+        }
+
+        /* Media Query for Extra Small Devices (Mobile) */
+        @media screen and (max-width: 480px) {
+            .btnContainer {
+                grid-template-columns: repeat(2, 1fr); /* 2 columns for mobile */
+            }
+
+            .selectBtn {
+                padding: 8px 15px;
+                font-size: 14px;
+            }
+
+            .searchBtn {
+                width: 100%;
+                padding: 10px 20px;
+                font-size: 13px;
+            }
+
+            .searchBtnHolder {
+                width: 100%;
+                margin-top: 20px; 
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <section>
+            <div class="btnContainer">
+                <!-- Button 1 -->
+                <div style="margin-bottom: 5px;">
+                    <button class="selectBntHolder">
+                        <select class="selectBtn" name="names" id="nameSelect">
+                            <option value="Select" selected disabled><span>1 |</span> Name</option>
+                            <option value="John">John</option>
+                            <option value="Alice">Alice</option>
+                            <option value="Bob">Bob</option>
+                            <option value="Charlie">Charlie</option>
+                        </select>
+                    </button>
+                </div>
+
+                <!-- Button 2 -->
+                <div style="margin-bottom: 5px;">
+                    <button class="selectBntHolder">
+                        <select class="selectBtn" name="names" id="nameSelect">
+                            <option value="Select" selected disabled><span>2 |</span> Name</option>
+                            <option value="John">John</option>
+                            <option value="Alice">Alice</option>
+                            <option value="Bob">Bob</option>
+                            <option value="Charlie">Charlie</option>
+                        </select>
+                    </button>
+                </div>
+
+                <!-- Button 3 -->
+                <div style="margin-bottom: 5px;">
+                    <button class="selectBntHolder">
+                        <select class="selectBtn" name="names" id="nameSelect">
+                            <option value="Select" selected disabled><span>3 |</span> Name</option>
+                            <option value="John">John</option>
+                            <option value="Alice">Alice</option>
+                            <option value="Bob">Bob</option>
+                            <option value="Charlie">Charlie</option>
+                        </select>
+                    </button>
+                </div>
+
+                <!-- Button 4 -->
+                <div style="margin-bottom: 5px;">
+                    <button class="selectBntHolder">
+                        <select class="selectBtn" name="names" id="nameSelect">
+                            <option value="Select" selected disabled><span>4 |</span> Name</option>
+                            <option value="John">John</option>
+                            <option value="Alice">Alice</option>
+                            <option value="Bob">Bob</option>
+                            <option value="Charlie">Charlie</option>
+                        </select>
+                    </button>
+                </div>
+
+                <!-- Button 5 -->
+                <div style="margin-bottom: 5px;">
+                    <button class="selectBntHolder">
+                        <select class="selectBtn" name="names" id="nameSelect">
+                            <option value="Select" selected disabled><span>5 |</span> Name</option>
+                            <option value="John">John</option>
+                            <option value="Alice">Alice</option>
+                            <option value="Bob">Bob</option>
+                            <option value="Charlie">Charlie</option>
+                        </select>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Search Button -->
+            <div class="searchBtnHolder">
+                <button class="searchBtn">Search</button>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        console.log("Hey Kardesh");
+    </script>
+</body>
+</html>
